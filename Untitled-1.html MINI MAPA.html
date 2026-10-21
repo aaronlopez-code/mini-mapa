@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini sistema interactivo</title>
+</head>
+<body>
+
+    <h2>Solicitud de servicio</h2>
+
+    <!-- Campo para ingresar el nombre del usuario -->
+    <label for="nombreUsuario">Nombre:</label>
+    <input type="text" id="nombreUsuario">
+
+    <br><br>
+
+    <!-- Menú para seleccionar una categoría -->
+    <label for="categoriaSeleccionada">Categoría:</label>
+    <select id="categoriaSeleccionada">
+        <option value="">Seleccione una categoría</option>
+        <option value="Papel">Papel</option>
+        <option value="Plástico">Plástico</option>
+        <option value="Vidrio">Vidrio</option>
+        <option value="Metal">Metal</option>
+    </select>
+
+    <br><br>
+
+    <!-- Campo numérico para ingresar el horario -->
+    <label for="horarioIngreso">Horario:</label>
+    <input type="number" id="horarioIngreso" min="0" max="23">
+
+    <br><br>
+
+    <!-- Botón que ejecuta la función de procesamiento -->
+    <button onclick="procesarDatos()">Procesar Datos</button>
+
+    <!-- Elemento donde se muestra el resultado final -->
+    <p id="mensajeFinal"></p>
+
+    <script>
+        // Declara una función llamada procesarDatos que se ejecuta al pulsar el botón.
+        function procesarDatos() {
+
+            // Obtiene el nombre escrito por el usuario y elimina espacios al principio y al final.
+            let nombreUsuario = document.getElementById("nombreUsuario").value.trim();
+
+            // Obtiene la categoría seleccionada en el menú desplegable.
+            let categoriaSeleccionada = document.getElementById("categoriaSeleccionada").value;
+
+            // Obtiene el horario ingresado y lo convierte de texto a número.
+            let horarioIngreso = document.getElementById("horarioIngreso").value;
+
+            // Busca el elemento HTML donde se mostrará el mensaje final.
+            let mensajeFinal = document.getElementById("mensajeFinal");
+
+            // Comprueba si el nombre, la categoría o el horario están vacíos.
+            if (nombreUsuario === "" || categoriaSeleccionada === "" || horarioIngreso === "") {
+
+                // Muestra un mensaje de error si falta completar algún dato.
+                mensajeFinal.textContent = "Debe completar todos los datos";
+
+            // Si los datos están completos, comprueba si el horario es mayor a 22.
+            } else if (Number(horarioIngreso) > 22) {
+
+                // Muestra el mensaje correspondiente al Turno Mañana.
+                mensajeFinal.textContent = "Hola " + nombreUsuario + ", su solicitud de " + categoriaSeleccionada + " fue asignada al Turno Mañana";
+
+            // Si el horario no es mayor a 22, ejecuta esta alternativa.
+            } else {
+
+                // Muestra el mensaje correspondiente al Turno Noche.
+                mensajeFinal.textContent = "Hola " + nombreUsuario + ", su solicitud de " + categoriaSeleccionada + " fue asignada al Turno Noche";
+
+            // Finaliza la estructura condicional.
+            }
+
+        // Finaliza la función procesarDatos.
+        }
+    </script>
+
+</body>
+</html>
